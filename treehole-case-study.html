@@ -342,9 +342,8 @@
   .comm-post { background: var(--p400); border-radius: 10px; padding: 9px 10px; margin-bottom: 7px; display: flex; gap: 9px; }
   .comm-post:last-child { margin-bottom: 0; }
   .comm-content { flex: 1; min-width: 0; }
-  .comm-thumb { width: 50px; height: 50px; border-radius: 8px; flex-shrink: 0; position: relative; overflow: hidden; display: flex; align-items: center; justify-content: center; font-size: 18px; }
-  .comm-thumb.t1 { background: linear-gradient(135deg, #C4B8E8, #8B7EC8); }
-  .comm-thumb.t2 { background: linear-gradient(135deg, #F0D9C0, #E0B89A); }
+  .comm-thumb { width: 52px; height: 52px; border-radius: 8px; flex-shrink: 0; overflow: hidden; background: var(--p300); }
+  .comm-thumb img { width: 100%; height: 100%; object-fit: cover; display: block; }
   .comm-text { font-size: 10.5px; color: var(--deep); margin-bottom: 5px; line-height: 1.45; }
   .comm-meta { display: flex; gap: 8px; align-items: center; }
   .comm-who { font-size: 9px; color: var(--ink3); }
@@ -717,14 +716,14 @@
         <div class="comm-demo">
           <div class="comm-top"><div class="comm-title">树洞广场</div><div class="comm-btn">+ 发帖</div></div>
           <div class="comm-post">
-            <div class="comm-thumb t1">🌷</div>
+            <div class="comm-thumb"><img src="./comm-1.jpg" alt="" /></div>
             <div class="comm-content">
               <div class="comm-text">今天第一次鼓起勇气说出来了，感觉好多了…</div>
               <div class="comm-meta"><div class="comm-who">匿名树洞 · 3 分钟前</div><div class="comm-like">❤ 12</div></div>
             </div>
           </div>
           <div class="comm-post">
-            <div class="comm-thumb t2">🌙</div>
+            <div class="comm-thumb"><img src="./comm-2.jpg" alt="" /></div>
             <div class="comm-content">
               <div class="comm-text">失眠三天了，树洞陪我聊到了四点</div>
               <div class="comm-meta"><div class="comm-who">匿名树洞 · 1 小时前</div><div class="comm-like">❤ 28</div></div>
