@@ -466,20 +466,78 @@
 
     <!-- Planet -->
     <div class="planet-wrap">
-      <svg width="180" height="180" viewBox="0 0 180 180" fill="none" xmlns="http://www.w3.org/2000/svg">
-        <ellipse cx="90" cy="90" rx="80" ry="20" stroke="rgba(255,255,255,0.22)" stroke-width="1.8" fill="none"/>
-        <ellipse cx="90" cy="90" rx="62" ry="14" stroke="rgba(255,255,255,0.14)" stroke-width="1.2" fill="none"/>
-        <circle cx="90" cy="90" r="42" fill="url(#pg)"/>
-        <ellipse cx="79" cy="80" rx="12" ry="8" fill="rgba(255,255,255,0.16)" transform="rotate(-28 79 80)"/>
-        <circle cx="138" cy="60" r="9" fill="rgba(255,255,255,0.28)"/>
-        <circle cx="141" cy="57" r="5.5" fill="rgba(255,255,255,0.5)"/>
+      <svg width="240" height="240" viewBox="0 0 360 360" fill="none" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="树洞磨砂玻璃行星吉祥物">
         <defs>
-          <radialGradient id="pg" cx="36%" cy="32%" r="65%">
-            <stop offset="0%" stop-color="#C4B8E8"/>
-            <stop offset="55%" stop-color="#8B7EC8"/>
-            <stop offset="100%" stop-color="#3D2F6B"/>
+          <radialGradient id="hgAmbient" cx="50%" cy="48%" r="50%">
+            <stop offset="0%" stop-color="#B8ADE8" stop-opacity="0.42"/>
+            <stop offset="50%" stop-color="#B8ADE8" stop-opacity="0.12"/>
+            <stop offset="100%" stop-color="#B8ADE8" stop-opacity="0"/>
           </radialGradient>
+          <radialGradient id="hgSphere" cx="38%" cy="32%" r="72%">
+            <stop offset="0%" stop-color="#E6DEF7"/>
+            <stop offset="28%" stop-color="#BEB0E7"/>
+            <stop offset="58%" stop-color="#8E7AC6"/>
+            <stop offset="82%" stop-color="#5C4694"/>
+            <stop offset="100%" stop-color="#3B2A65"/>
+          </radialGradient>
+          <radialGradient id="hgShade" cx="66%" cy="72%" r="64%">
+            <stop offset="0%" stop-color="#281A50" stop-opacity="0"/>
+            <stop offset="62%" stop-color="#281A50" stop-opacity="0"/>
+            <stop offset="100%" stop-color="#281A50" stop-opacity="0.52"/>
+          </radialGradient>
+          <radialGradient id="hgRim" cx="50%" cy="50%" r="50%">
+            <stop offset="0%" stop-color="#ffffff" stop-opacity="0"/>
+            <stop offset="85%" stop-color="#ffffff" stop-opacity="0"/>
+            <stop offset="94%" stop-color="#F0E9FC" stop-opacity="0.6"/>
+            <stop offset="100%" stop-color="#F0E9FC" stop-opacity="0"/>
+          </radialGradient>
+          <radialGradient id="hgSpec" cx="50%" cy="50%" r="50%">
+            <stop offset="0%" stop-color="#ffffff" stop-opacity="0.95"/>
+            <stop offset="55%" stop-color="#ffffff" stop-opacity="0.28"/>
+            <stop offset="100%" stop-color="#ffffff" stop-opacity="0"/>
+          </radialGradient>
+          <radialGradient id="hgBead" cx="36%" cy="32%" r="70%">
+            <stop offset="0%" stop-color="#ffffff"/>
+            <stop offset="48%" stop-color="#DAD1F3"/>
+            <stop offset="100%" stop-color="#9A88CE"/>
+          </radialGradient>
+          <radialGradient id="hgBeadGlow" cx="50%" cy="50%" r="50%">
+            <stop offset="0%" stop-color="#CFC4F0" stop-opacity="0.55"/>
+            <stop offset="100%" stop-color="#CFC4F0" stop-opacity="0"/>
+          </radialGradient>
+          <radialGradient id="hgContact" cx="50%" cy="50%" r="50%">
+            <stop offset="0%" stop-color="#4A3570" stop-opacity="0.28"/>
+            <stop offset="100%" stop-color="#4A3570" stop-opacity="0"/>
+          </radialGradient>
+          <linearGradient id="hgRing" x1="0" y1="0" x2="1" y2="1">
+            <stop offset="0%" stop-color="#F4EFFC"/>
+            <stop offset="50%" stop-color="#DDD3F4"/>
+            <stop offset="100%" stop-color="#B9A9E4"/>
+          </linearGradient>
         </defs>
+        <circle cx="180" cy="180" r="178" fill="url(#hgAmbient)"/>
+        <circle cx="180" cy="178" r="112" fill="none" stroke="#B8ADE8" stroke-opacity="0.10" stroke-width="1"/>
+        <circle cx="180" cy="178" r="140" fill="none" stroke="#B8ADE8" stroke-opacity="0.07" stroke-width="1"/>
+        <circle cx="180" cy="178" r="166" fill="none" stroke="#B8ADE8" stroke-opacity="0.045" stroke-width="1"/>
+        <g transform="translate(180 178) rotate(-20)"><ellipse cx="0" cy="0" rx="142" ry="44" fill="none" stroke="url(#hgRing)" stroke-width="2.5" opacity="0.5"/></g>
+        <g transform="translate(180 182) rotate(22)"><ellipse cx="0" cy="0" rx="120" ry="50" fill="none" stroke="#E6DCF8" stroke-width="2" opacity="0.32"/></g>
+        <ellipse cx="180" cy="274" rx="64" ry="15" fill="url(#hgContact)"/>
+        <circle cx="180" cy="178" r="90" fill="url(#hgSphere)"/>
+        <circle cx="180" cy="178" r="90" fill="url(#hgShade)"/>
+        <circle cx="180" cy="178" r="90" fill="url(#hgRim)"/>
+        <ellipse cx="150" cy="146" rx="30" ry="19" fill="url(#hgSpec)" transform="rotate(-28 150 146)"/>
+        <circle cx="141" cy="139" r="4.5" fill="#ffffff" fill-opacity="0.9"/>
+        <g transform="translate(180 178) rotate(-20)">
+          <ellipse cx="0" cy="0" rx="142" ry="44" fill="none" stroke="#F0E9FC" stroke-width="1.5" opacity="0.16"/>
+          <path d="M -142 0 A 142 44 0 0 1 142 0" fill="none" stroke="url(#hgRing)" stroke-width="2.5" opacity="0.72"/>
+        </g>
+        <circle cx="272" cy="116" r="17" fill="url(#hgBeadGlow)"/>
+        <circle cx="272" cy="116" r="7.5" fill="url(#hgBead)"/>
+        <circle cx="88" cy="240" r="19" fill="url(#hgBeadGlow)"/>
+        <circle cx="88" cy="240" r="8.5" fill="url(#hgBead)"/>
+        <circle cx="300" cy="86" r="2.6" fill="#ffffff" fill-opacity="0.55"/>
+        <circle cx="66" cy="128" r="2.2" fill="#E6DCF8" fill-opacity="0.6"/>
+        <circle cx="262" cy="262" r="2" fill="#ffffff" fill-opacity="0.45"/>
       </svg>
     </div>
 
