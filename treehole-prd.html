@@ -1,0 +1,294 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>树洞 · 产品需求文档 PRD</title>
+<style>
+  *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+  :root{
+    --p100:#8B7EC8;--p200:#B8ADE8;--p300:#DDD8F5;--p400:#EEE9FB;
+    --deep:#2B2347;--ink2:#5C5876;--ink3:#9A98B5;--bg:#F0EDF8;
+    --glass:rgba(255,255,255,0.66);--gb:rgba(255,255,255,0.85);
+    --ok:#3FA776;--warn:#C98A2B;--no:#C2536A;
+  }
+  html{scroll-behavior:smooth}
+  body{
+    font-family:-apple-system,"PingFang SC","Helvetica Neue",sans-serif;color:var(--deep);line-height:1.75;
+    background:radial-gradient(1100px 600px at 88% -8%,rgba(184,173,232,0.40),transparent 60%),
+               radial-gradient(800px 500px at -8% 105%,rgba(139,126,200,0.26),transparent 60%),var(--bg);
+    min-height:100vh;
+  }
+  /* top bar */
+  .topbar{position:sticky;top:0;z-index:50;display:flex;align-items:center;justify-content:space-between;
+    padding:0 32px;height:58px;background:rgba(240,237,248,0.78);backdrop-filter:blur(20px);border-bottom:1px solid rgba(255,255,255,0.6)}
+  .tb-logo{font-size:15px;font-weight:700;color:var(--p100);display:flex;align-items:center;gap:8px}
+  .tb-logo span{color:var(--ink2);font-weight:400}
+  .tb-links{display:flex;gap:8px}
+  .tb-link{font-size:13px;color:var(--p100);text-decoration:none;background:var(--glass);border:1px solid var(--gb);padding:6px 13px;border-radius:18px}
+  .tb-link:hover{background:#fff}
+  .tb-link.solid{background:linear-gradient(135deg,#8B7EC8,#7B5EA7);color:#fff;border:none}
+
+  .wrap{max-width:840px;margin:0 auto;padding:48px 28px 90px}
+  /* hero */
+  .doc-head{margin-bottom:14px}
+  .eyebrow{font-size:12px;letter-spacing:1.2px;text-transform:uppercase;color:var(--ink3);margin-bottom:14px}
+  h1{font-size:clamp(32px,5vw,46px);font-weight:800;letter-spacing:-1px;line-height:1.15}
+  h1 b{color:var(--p100)}
+  .tagline{font-size:18px;color:var(--ink2);margin-top:16px;max-width:640px;line-height:1.7}
+  .meta-pills{display:flex;gap:10px;flex-wrap:wrap;margin-top:22px}
+  .pill{font-size:12.5px;background:var(--glass);border:1px solid var(--gb);border-radius:20px;padding:6px 14px;color:var(--deep);backdrop-filter:blur(10px)}
+  .pill b{color:var(--p100)}
+
+  section{margin-top:52px}
+  .sec-num{font-size:12px;font-weight:700;color:var(--p100);letter-spacing:1px}
+  h2{font-size:25px;font-weight:800;letter-spacing:-.4px;margin-top:6px}
+  h3{font-size:17px;font-weight:700;margin-top:26px;margin-bottom:8px}
+  p{font-size:15.5px;color:var(--ink2);margin-top:10px}
+  .lead{font-size:16px;color:var(--ink2)}
+  strong{color:var(--deep);font-weight:600}
+  .accent{color:var(--p100);font-weight:600}
+
+  .card{background:var(--glass);border:1px solid var(--gb);border-radius:18px;padding:22px 24px;margin-top:18px;backdrop-filter:blur(14px)}
+  .grid2{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-top:18px}
+  .grid3{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin-top:18px}
+  .mini{background:var(--glass);border:1px solid var(--gb);border-radius:16px;padding:20px}
+  .mini .ic{width:42px;height:42px;border-radius:12px;background:var(--p400);color:var(--p100);display:flex;align-items:center;justify-content:center;margin-bottom:12px}
+  .mini h4{font-size:16px;font-weight:700}
+  .mini p{font-size:13.5px;margin-top:6px}
+  .ic svg{width:22px;height:22px;fill:none;stroke:currentColor;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}
+
+  table{width:100%;border-collapse:separate;border-spacing:0;margin-top:18px;font-size:14px;background:var(--glass);border:1px solid var(--gb);border-radius:16px;overflow:hidden;backdrop-filter:blur(14px)}
+  th,td{text-align:left;padding:13px 16px;border-bottom:1px solid rgba(139,126,200,0.12)}
+  th{background:rgba(139,126,200,0.10);font-size:12.5px;font-weight:700;color:var(--deep);text-transform:none}
+  tr:last-child td{border-bottom:none}
+  td{color:var(--ink2)}
+  td b{color:var(--deep)}
+  .st{font-size:12px;font-weight:700;padding:3px 9px;border-radius:10px;white-space:nowrap}
+  .st.ok{background:rgba(63,167,118,0.14);color:var(--ok)}
+  .st.go{background:rgba(139,126,200,0.16);color:var(--p100)}
+  .st.wait{background:rgba(201,138,43,0.14);color:var(--warn)}
+  .st.no{background:rgba(194,83,106,0.13);color:var(--no)}
+
+  ul.clean{list-style:none;margin-top:12px;display:flex;flex-direction:column;gap:10px}
+  ul.clean li{font-size:15px;color:var(--ink2);padding-left:26px;position:relative;line-height:1.6}
+  ul.clean li::before{content:'';position:absolute;left:4px;top:9px;width:8px;height:8px;border-radius:50%;background:var(--p200)}
+  ul.clean li b{color:var(--deep)}
+
+  .code{background:#2B2347;color:#E4DCF6;border-radius:16px;padding:20px 22px;margin-top:18px;font-family:"SF Mono",ui-monospace,monospace;font-size:12.5px;line-height:1.8;overflow-x:auto;white-space:pre}
+  .code .k{color:#C4B8E8;font-weight:600}
+  .code .c{color:#7E76A0}
+
+  .timeline{display:flex;flex-direction:column;gap:0;margin-top:20px}
+  .tl{display:flex;gap:18px;padding-bottom:24px;position:relative}
+  .tl:last-child{padding-bottom:0}
+  .tl::before{content:'';position:absolute;left:21px;top:46px;bottom:0;width:2px;background:rgba(139,126,200,0.2)}
+  .tl:last-child::before{display:none}
+  .tl-badge{width:44px;height:44px;border-radius:13px;flex-shrink:0;display:flex;align-items:center;justify-content:center;font-size:13px;font-weight:800;color:#fff}
+  .tl-badge.v1{background:linear-gradient(135deg,#8B7EC8,#7B5EA7)}
+  .tl-badge.v2{background:linear-gradient(135deg,#9B7EC8,#6B5499)}
+  .tl-badge.v3{background:#cdc6dd;color:#6B6889}
+  .tl-b h4{font-size:16px;font-weight:700;display:flex;align-items:center;gap:8px}
+  .tl-b p{font-size:14px;margin-top:4px}
+
+  .callout{border-left:3px solid var(--p100);background:var(--glass);border-radius:0 14px 14px 0;padding:16px 20px;margin-top:18px}
+  .callout.warn{border-color:var(--warn)}
+  .callout b{color:var(--deep)}
+  .callout p{margin-top:4px}
+
+  footer{text-align:center;padding:50px 20px;color:var(--ink3);font-size:13.5px;border-top:1px solid rgba(139,126,200,0.12);margin-top:60px}
+  .footer-logo{font-size:20px;font-weight:800;color:var(--p100);margin-bottom:6px}
+
+  .fade{opacity:0;transform:translateY(18px);transition:.6s}
+  .fade.in{opacity:1;transform:none}
+  @media(max-width:680px){.grid2,.grid3{grid-template-columns:1fr}.tb-links .hidem{display:none}.wrap{padding:32px 18px 60px}}
+</style>
+</head>
+<body>
+
+<div class="topbar">
+  <div class="tb-logo">🌙 树洞 <span>PRD</span></div>
+  <div class="tb-links">
+    <a class="tb-link hidem" href="./treehole-case-study.html">案例页</a>
+    <a class="tb-link solid" href="./treehole-prototype.html">▶ 交互原型</a>
+  </div>
+</div>
+
+<div class="wrap">
+  <div class="doc-head">
+    <div class="eyebrow">Product Requirements Document · v2.0</div>
+    <h1>树洞 <b>产品需求文档</b></h1>
+    <p class="tagline">一个 <strong>匿名 + AI 陪伴</strong> 的情绪树洞 App——白天和 AI「小紫」聊心事，也能在匿名社区里发泄、被陌生人温柔回应。</p>
+    <div class="meta-pills">
+      <div class="pill">版本 <b>v2.0</b></div>
+      <div class="pill">平台 <b>iOS 17+</b></div>
+      <div class="pill">定位 <b>情绪陪伴</b></div>
+      <div class="pill">商业化 <b>¥3.9 / 月</b></div>
+    </div>
+  </div>
+
+  <section class="fade">
+    <div class="sec-num">01</div>
+    <h2>产品概述</h2>
+    <p class="lead">「树洞」是一款主打 <span class="accent">情绪陪伴</span> 的 iOS App，核心体验有两块：</p>
+    <div class="grid2">
+      <div class="mini">
+        <div class="ic"><svg viewBox="0 0 24 24"><path d="M21 11.5a8.4 8.4 0 0 1-8.5 8.4 8.5 8.5 0 0 1-3.8-.9L3 21l1.9-5.7a8.4 8.4 0 0 1-.9-3.8A8.5 8.5 0 0 1 12.5 3 8.5 8.5 0 0 1 21 11.5z"/></svg></div>
+        <h4>AI 陪伴</h4>
+        <p>和情绪陪伴 AI「小紫」一对一聊天，倾诉、整理心情、被共情。不评判、不说教，先共情再轻轻反问。</p>
+      </div>
+      <div class="mini">
+        <div class="ic"><svg viewBox="0 0 24 24"><circle cx="9" cy="8" r="3.2"/><path d="M3 20c0-3.3 2.7-5.5 6-5.5s6 2.2 6 5.5"/><path d="M16 5.2A3 3 0 0 1 16 11M21 20c0-2.6-1.4-4.4-3.5-5.1"/></svg></div>
+        <h4>匿名社区 <span style="font-size:11px;color:var(--p100)">v2 新增</span></h4>
+        <p>把想说的话匿名发出去，像朋友圈，但所有人都是匿名的，可互相评论，但不能私聊。</p>
+      </div>
+    </div>
+    <h3>为什么做</h3>
+    <ul class="clean">
+      <li>现代人有大量「不想被熟人知道、又憋着难受」的情绪，缺一个<b>安全的出口</b>。</li>
+      <li>跟熟人吐槽有社交压力，跟陌生人吐槽又怕被认出——<b>匿名 + AI</b> 同时解决「被听见」和「安全感」。</li>
+      <li>市面上 AI 工具偏工具化（写代码、查资料），缺一个<b>专注情绪价值</b>、视觉温柔的产品。</li>
+    </ul>
+    <h3>目标用户与基调</h3>
+    <div class="grid2">
+      <div class="card" style="margin-top:0"><strong>目标用户</strong><p style="margin-top:8px">18–35 岁，学生 / 初入职场 / 独居人群；有倾诉欲但缺乏安全倾诉对象；对「匿名」「治愈系」「陪伴感」敏感。</p></div>
+      <div class="card" style="margin-top:0"><strong>设计基调</strong><p style="margin-top:8px">暖白底 + 薰衣草紫，柔和、安静、去棱角；吉祥物紫色行星「小紫」，象征一个安静陪着你的小星球。</p></div>
+    </div>
+  </section>
+
+  <section class="fade">
+    <div class="sec-num">02</div>
+    <h2>版本规划</h2>
+    <div class="timeline">
+      <div class="tl">
+        <div class="tl-badge v1">v1.0</div>
+        <div class="tl-b"><h4>AI 聊天基座 <span class="st ok">已完成</span></h4><p>登录 + AI 聊天 + 个人页 + 设置 + 成就 + 会员页（UI）。SwiftData 本地持久化，接硅基流动 Qwen2.5-7B 真实回复。</p></div>
+      </div>
+      <div class="tl">
+        <div class="tl-badge v2">v2.0</div>
+        <div class="tl-b"><h4>匿名社区 <span class="st go">进行中</span></h4><p>匿名社区（发帖 / 图片 / 评论）+ 我的树洞个人页 + 设置精简。底部三 Tab：社区 / 聊天 / 我的。</p></div>
+      </div>
+      <div class="tl">
+        <div class="tl-badge v3">v3.0</div>
+        <div class="tl-b"><h4>商业化与智能 <span class="st wait">规划中</span></h4><p>真支付、推送通知、图片识别、语音输入、成就系统逻辑、内容审核与危机干预。</p></div>
+      </div>
+    </div>
+
+    <h3>v1.0 已实现功能清单</h3>
+    <table>
+      <tr><th>模块</th><th>功能点</th><th>说明</th></tr>
+      <tr><td><b>登录</b></td><td>手机号 / 邮箱登录</td><td>当前为 Mock，输入合法格式即通过</td></tr>
+      <tr><td><b>AI 聊天</b></td><td>和小紫一对一对话</td><td>接硅基流动 Qwen2.5-7B，真实 AI 回复</td></tr>
+      <tr><td><b>聊天</b></td><td>多行输入、气泡、打字动画、本地持久化</td><td>SwiftData 存对话，关 App 不丢</td></tr>
+      <tr><td><b>侧边抽屉</b></td><td>新建 / 历史 / 成就 / 会员 / 设置</td><td>NavigationStack 路由</td></tr>
+      <tr><td><b>历史聊天</b></td><td>搜索 + 会话列表</td><td>读本地 SwiftData</td></tr>
+      <tr><td><b>我的成就</b></td><td>皇冠分级 + 徽章墙</td><td>UI 完成，逻辑未接</td></tr>
+      <tr><td><b>会员</b></td><td>月卡 ¥3.9 + 权益 + 支付选择</td><td>UI 完成，支付未接</td></tr>
+      <tr><td><b>设置</b></td><td>读消息震动 / 检查更新 / 关于 / 退出</td><td>—</td></tr>
+    </table>
+  </section>
+
+  <section class="fade">
+    <div class="sec-num">03</div>
+    <h2>核心需求 · 匿名社区（v2）</h2>
+    <p class="lead">用户可以匿名发布 <span class="accent">文字 + 图片</span> 动态，所有用户能看到、能评论。</p>
+    <h3>关键规则</h3>
+    <ul class="clean">
+      <li><b>完全匿名</b>：每个人显示为随机昵称（如「137 号树洞」），不暴露真实用户名 / ID。</li>
+      <li><b>可评论</b>：评论同样匿名。</li>
+      <li><b>不可私聊</b>：点头像不能进入聊天——这是和朋友圈最大的区别。</li>
+      <li><b>内容</b>：纯文字，或文字 + 图片（v2.0 先支持 1 张，后续多图）。</li>
+    </ul>
+    <h3>页面结构</h3>
+    <div class="grid3">
+      <div class="mini"><h4>社区信息流</h4><p><code>CommunityView</code><br/>倒序卡片：匿名昵称 + 时间 + 正文 + 图片 + 评论数；下拉刷新。</p></div>
+      <div class="mini"><h4>发帖页</h4><p><code>NewPostView</code><br/>文本框 + 选图按钮 + 发布。</p></div>
+      <div class="mini"><h4>帖子详情</h4><p><code>PostDetailView</code><br/>全文 + 评论列表 + 底部评论框。</p></div>
+    </div>
+    <div class="callout warn"><b>⚠️ 匿名 ≠ 无管控</b><p>匿名社区必须有内容审核（敏感词过滤 + 举报机制），否则上架被拒甚至违法。v2 至少要做敏感词过滤。</p></div>
+  </section>
+
+  <section class="fade">
+    <div class="sec-num">04</div>
+    <h2>技术架构</h2>
+    <div class="grid2">
+      <div class="card" style="margin-top:0">
+        <strong>客户端 · iOS</strong>
+        <ul class="clean" style="margin-top:10px">
+          <li>Swift 5.9 / SwiftUI，最低 iOS 17</li>
+          <li>本地存储 SwiftData（对话、消息）</li>
+          <li>SPM 包 <code>Treehole</code> + 外壳工程 <code>AITreeholeApp</code></li>
+          <li><code>ChatServiceProtocol</code>：Mock 与真后端一行切换</li>
+        </ul>
+      </div>
+      <div class="card" style="margin-top:0">
+        <strong>后端 · Node.js</strong>
+        <ul class="clean" style="margin-top:10px">
+          <li>Hono（TypeScript）</li>
+          <li>鉴权 <code>/auth/sms · /verify · /email</code>（Mock）</li>
+          <li>聊天 <code>/chat/seed · /chat/send</code>（接 AI）</li>
+          <li>AI：硅基流动 Qwen2.5-7B-Instruct</li>
+        </ul>
+      </div>
+    </div>
+    <h3>数据模型（v2）</h3>
+    <div class="code"><span class="c">// 用户 / 对话 / 消息</span>
+<span class="k">User</span>     { id, displayName, treeholeID <span class="c">// sd_1387 不可改</span> }
+<span class="k">Conversation</span> { id, title, vibe, createdAt, lastMessageAt, messages[] }
+<span class="k">Message</span>  { id, role(user/assistant), text, createdAt }
+
+<span class="c">// ★ v2 社区</span>
+<span class="k">Post</span>     { id, anonName <span class="c">// 137 号树洞</span>, authorToken <span class="c">// 仅后端</span>,
+           text, imageURL?, createdAt, commentCount }
+<span class="k">Comment</span>  { id, postId, anonName, text, createdAt }</div>
+  </section>
+
+  <section class="fade">
+    <div class="sec-num">05</div>
+    <h2>商业化路径</h2>
+    <div class="grid3">
+      <div class="mini"><div class="ic"><svg viewBox="0 0 24 24"><path d="M3 8l4 3 5-6 5 6 4-3-2 11H5z"/></svg></div><h4>会员订阅</h4><p>¥3.9 / 月，首月免费。无限对话、高级模型、更长记忆、专属皮肤 / 成就。</p></div>
+      <div class="mini"><div class="ic"><svg viewBox="0 0 24 24"><rect x="3" y="6" width="18" height="13" rx="2"/><path d="M3 10h18"/></svg></div><h4>增值购买</h4><p>单次购买高级功能（导出、皮肤包）。</p></div>
+      <div class="mini"><div class="ic"><svg viewBox="0 0 24 24"><path d="M20.8 6.6a5 5 0 0 0-8.8-2 5 5 0 0 0-8.8 2c-1 3.4 2.6 6.7 8.8 11 6.2-4.3 9.8-7.6 8.8-11z"/></svg></div><h4>社区留存</h4><p>不直接变现，作用是提高留存，间接拉高会员转化。</p></div>
+    </div>
+    <h3>上线前置条件</h3>
+    <table>
+      <tr><th>事项</th><th>说明</th><th>状态</th></tr>
+      <tr><td><b>Apple 开发者账号</b></td><td>个人 ¥688/年，上架 / TestFlight 必需</td><td><span class="st no">未完成</span></td></tr>
+      <tr><td><b>后端上云</b></td><td>当前在本机，必须搬云</td><td><span class="st no">未完成</span></td></tr>
+      <tr><td><b>真实支付接入</b></td><td>苹果内购 或 第三方支付</td><td><span class="st no">未完成</span></td></tr>
+      <tr><td><b>软著 / ICP / 算法备案</b></td><td>国内上架 + AI 监管要求</td><td><span class="st no">未完成</span></td></tr>
+      <tr><td><b>隐私政策 + 用户协议</b></td><td>已有占位入口，需补真实文案</td><td><span class="st wait">部分</span></td></tr>
+    </table>
+    <div class="callout"><b>节奏建议</b><p>先做出社区 + 上云 → 自己和朋友内测验证留存 → 达标后注册开发者、走合规、接支付 → 上架小范围推广看付费转化。</p></div>
+  </section>
+
+  <section class="fade">
+    <div class="sec-num">06</div>
+    <h2>风险与注意</h2>
+    <div class="grid2">
+      <div class="mini"><h4>🛡️ 内容安全</h4><p>匿名社区需敏感词过滤 + 举报；AI 回复需兜底，情绪类用户可能涉及自伤话题，需<b>危机干预提示</b>（引导拨打心理援助热线）。</p></div>
+      <div class="mini"><h4>💰 成本控制</h4><p>AI 调用、图片存储、服务器是持续成本，免费用户多了会亏钱，需控制免费额度。</p></div>
+      <div class="mini"><h4>📜 合规风险</h4><p>AI 类 App 需算法备案；匿名内容若失控可能违规甚至违法，审核机制是上架硬门槛。</p></div>
+      <div class="mini"><h4>🔑 证书限制</h4><p>当前开发签名 7 天过期，仅供自测，不能当正式分发。</p></div>
+    </div>
+  </section>
+</div>
+
+<footer>
+  <div class="footer-logo">🌙 树洞 · Treehole</div>
+  <div>产品需求文档 v2.0 · 匿名 + AI 情绪陪伴 iOS App</div>
+  <div style="margin-top:14px"><a class="tb-link solid" style="text-decoration:none" href="./treehole-prototype.html">▶ 打开可交互原型</a></div>
+</footer>
+
+<script>
+  const fades=document.querySelectorAll('.fade');
+  const ob=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting)e.target.classList.add('in')}),{threshold:0.01,rootMargin:'0px 0px -8% 0px'});
+  fades.forEach(el=>ob.observe(el));
+  const revealInView=()=>fades.forEach(el=>{if(el.getBoundingClientRect().top<window.innerHeight*0.95)el.classList.add('in')});
+  revealInView();
+  window.addEventListener('scroll',revealInView,{passive:true});
+  setTimeout(()=>fades.forEach(el=>el.classList.add('in')),1800);
+</script>
+</body>
+</html>
